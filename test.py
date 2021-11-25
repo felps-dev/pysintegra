@@ -1,12 +1,9 @@
+from datetime import datetime
 from pysintegra.processamento import ArquivoMagnetico
 
 arq = ArquivoMagnetico()
-arq.add_registro_10(2, 'Teste')
+arq.add_registro_10(1234567891011, 'ISENTO', 'Nome do Contribuinte / Razao Social',
+                    'Rio de Janeiro', 'RJ', 'ISENTO', datetime.now(), datetime.now(), '1', '1', '1')
 
 # TESTE COM SUCESSO
-print(arq.registros[0].descricao.value)
-
-# TESTE COM ERRO
-arq.add_registro_10(322, 'Teste COM ERRO')
-
-print(arq.registros[0].descricao.value)
+print(arq.gerar())
