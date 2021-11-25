@@ -13,7 +13,7 @@ class Registro():
         for valor in self.__dir__():
             if(valor[0:2] != '__'):
                 at = getattr(self, valor)
-                final += str(at)
+                final += str(at).ljust(at.size, ' ')
                 i += 1
         return final
 
