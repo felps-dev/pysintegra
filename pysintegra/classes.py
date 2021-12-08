@@ -44,12 +44,14 @@ class Formato():
     value = 0
     description = 'Nenhuma descrição fornecida'
     changeable = True
+    decimal_places = 2
 
-    def __init__(self, description, size, value, changeable=True):
+    def __init__(self, description, size, value, changeable=True, decimal_places=2):
         self.value = value
         self.size = size
         self.description = description
         self.changeable = changeable
+        self.decimal_places = decimal_places
 
     def __str__(self):
         return str(self.value)
@@ -84,6 +86,22 @@ class FormatoNData(Formato):
         super().pre_validate()
         if(not isinstance(self.value, datetime.date)):
             self.raise_error(' não é do tipo date')
+        return True
+
+
+class FormatoNValor(Formato):
+    """
+        Formato do tipo N, numérico tipo Valor
+    """
+
+    def __str__(self):
+        return str("{0:." + self.decimal_places +
+                   "}").format(self.value).rstrip('.').ljust(self.size, '0')
+
+    def validar(self):
+        super().pre_validate()
+        if(not isinstance(self.value, float)):
+            self.raise_error(' não é do tipo float ou Decimal.')
         return True
 
 

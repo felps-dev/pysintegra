@@ -3,6 +3,7 @@
 ## Com o surgimento do SPED, muitos estados não utilizam mais este formato, confira se a UF de destino realmente exige o SINTEGRA.
 
 A lib teve frotes inspirações de arquitetura baseadas nessas:
+
 - https://github.com/TadaSoftware/PyNFe
 - https://github.com/sped-br/python-sped
 
@@ -18,8 +19,8 @@ Nenhuma dependência até o momento.
 ### Registros finalizados
 
 - [x] Registro 10
-- [ ] Registro 11
-- [ ] Registro 50
+- [x] Registro 11
+- [x] Registro 50
 - [ ] Registro 51
 - [ ] Registro 53
 - [ ] Registro 54
