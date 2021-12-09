@@ -21,22 +21,22 @@ Nenhuma dependência até o momento.
 - [x] Registro 10
 - [x] Registro 11
 - [x] Registro 50
-- [ ] Registro 51
-- [ ] Registro 53
-- [ ] Registro 54
-- [ ] Registro 55
-- [ ] Registro 60M
-- [ ] Registro 60A
-- [ ] Registro 60l
-- [ ] Registro 61
-- [ ] Registro 70
-- [ ] Registro 71
-- [ ] Registro 74
-- [ ] Registro 75
-- [ ] Registro 76
-- [ ] Registro 85
-- [ ] Registro 86
-- [ ] Registro 90
+- [x] Registro 51
+- [x] Registro 53
+- [x] Registro 54
+- [x] Registro 55
+- [x] Registro 60M
+- [x] Registro 60A
+- [x] Registro 60I
+- [x] Registro 61
+- [x] Registro 70
+- [x] Registro 71
+- [x] Registro 74
+- [x] Registro 75
+- [x] Registro 76
+- [x] Registro 85
+- [x] Registro 86
+- [x] Registro 90
 
 ### Exemplo de uso
 
