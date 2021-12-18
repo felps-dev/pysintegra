@@ -29,6 +29,7 @@ Nenhuma dependência até o momento.
 - [x] Registro 60A
 - [x] Registro 60I
 - [x] Registro 61
+- [x] Registro 61R
 - [x] Registro 70
 - [x] Registro 71
 - [x] Registro 74

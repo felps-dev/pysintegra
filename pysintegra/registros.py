@@ -249,6 +249,21 @@ class Registro61(Registro):
     brancos = FormatoX('Brancos', 1, None, False)
 
 
+class Registro61R(Registro):
+    tipo = FormatoN('Tipo 61', 2, '61', False)
+    subtipo = FormatoN('Tipo R', 1, 'R', False)
+    mes_ano = FormatoX('Mês e ano de emissão dos documentos fiscais', 6, None)
+    codigo_produto = FormatoX('Código do produto do informante', 14, None)
+    quantidade = FormatoNValor(
+        'Quantidade do produto/mercadoria(com 3 decimais)', 13, None, decimal_places=3)
+    valor_total = FormatoNValor(
+        'Valor Total', 16, None)
+    bc_icms = FormatoNValor(
+        'Base de cálculo do ICMS (com 2 decimais)', 16, None)
+    aliquota = FormatoNValor('Alíquota do ICMS (com 2 decimais)', 4, None)
+    brancos = FormatoX('Brancos', 54, None, False)
+
+
 class Registro70(Registro):
     tipo = FormatoN('Tipo 70', 2, '70', False)
     cnpj = FormatoN(
