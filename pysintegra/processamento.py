@@ -1,5 +1,5 @@
 
-from pysintegra.registros import Registro10, Registro11, Registro50, Registro51, Registro53, Registro54, Registro55, Registro60A, Registro60I, Registro60M, Registro61, Registro70, Registro71, Registro74, Registro75, Registro76, Registro85, Registro86, Registro90
+from pysintegra.registros import Registro10, Registro11, Registro50, Registro51, Registro53, Registro54, Registro55, Registro60A, Registro60I, Registro60M, Registro61, Registro61R, Registro70, Registro71, Registro74, Registro75, Registro76, Registro85, Registro86, Registro90
 
 
 class ArquivoMagnetico(object):
@@ -110,6 +110,14 @@ class ArquivoMagnetico(object):
             modelo 2, e Nota Fiscal de Produtor, modelo 4;  
         """
         self.registros.append(Registro61(*args))
+
+    def add_registro_61R(self, *args):
+        """
+            ### Registro 61R
+            Resumo Mensal por Item : Registro de mercadoria/produto ou serviço comercializados 
+            através de nota fiscal de venda a consumidor não emitida por ECF  
+        """
+        self.registros.append(Registro61R(*args))
 
     def add_registro_70(self, *args):
         """
