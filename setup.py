@@ -1,7 +1,9 @@
 import setuptools
+import pathlib
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+REPO = pathlib.Path(__file__).parent
+
+README = (REPO / "readme.md").read_text()
 
 setuptools.setup(
     name='pysintegra',
@@ -9,7 +11,7 @@ setuptools.setup(
     author='Felipe Correa',
     author_email='eu@felps.dev',
     description='Gerador do arquivo magnético Sintegra',
-    long_description=long_description,
+    long_description=README,
     long_description_content_type="text/markdown",
     url='https://github.com/felps-dev/pysintegra',
     project_urls={
