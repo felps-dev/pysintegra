@@ -187,5 +187,5 @@ class ArquivoMagnetico(object):
     def gerar(self):
         sintegra_txt = ''
         for registro in self.registros:
-            sintegra_txt += str(registro)
+            sintegra_txt += str(registro) + '\n'
         return sintegra_txt
