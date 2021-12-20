@@ -71,7 +71,7 @@ class FormatoN(Formato):
     """
 
     def __str__(self):
-        return str(self.value).rjust(self.size, '0')
+        return str(self.value).rstrip('.').rjust(self.size, '0')
 
     def validar(self):
         super().pre_validate()
