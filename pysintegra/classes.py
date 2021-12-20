@@ -1,5 +1,6 @@
 import datetime
 from decimal import Decimal
+import copy
 
 
 class Registro():
@@ -21,16 +22,19 @@ class Registro():
     def __init__(self, *args):
         # Valida se todos os valures atribuídos são válidos.
         i = 0
-        for valor in self.__dir__():
-            if(valor[0:2] != '__'):
-                at = getattr(self, valor)
-                if(at.changeable):
+        for variavel in self.__dir__():
+            if(variavel[0:2] != '__'):
+                registro = getattr(self, variavel)
+                # Cria uma cópia do registro, caso contrário o python associa ao endereço de memória
+                new_registro = copy.copy(registro)
+                if(registro.changeable):
                     if(i >= len(args)):
                         raise ValueError(
-                            "Erro no " + self.__class__.__name__ + ": Faltando valor para " + at.description)
-                    at.value = args[i]
+                            "Erro no " + self.__class__.__name__ + ": Faltando valor para " + registro.description)
+                    new_registro.value = args[i]
                     try:
-                        at.validar()
+                        new_registro.validar()
+                        setattr(self, variavel, new_registro)
                     except ValueError as e:
                         raise ValueError(
                             "Erro no " + self.__class__.__name__ + ": " + str(e) + '. Valor: ' + str(args[i]))

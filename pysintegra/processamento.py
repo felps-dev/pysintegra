@@ -5,6 +5,9 @@ from pysintegra.registros import Registro10, Registro11, Registro50, Registro51,
 class ArquivoMagnetico(object):
     registros = []
 
+    def __init__(self):
+        self.registros = []
+
     def __str__(self):
         return self.registros
 
