@@ -1,4 +1,5 @@
 import datetime
+from decimal import Decimal
 
 
 class Registro():
@@ -100,7 +101,7 @@ class FormatoNValor(Formato):
 
     def validar(self):
         super().pre_validate()
-        if(not isinstance(self.value, float)):
+        if(not isinstance(self.value, float) or not isinstance(self.value, Decimal)):
             self.raise_error(' não é do tipo float ou Decimal.')
         return True
 
