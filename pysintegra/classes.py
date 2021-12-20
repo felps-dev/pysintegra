@@ -14,7 +14,7 @@ class Registro():
         for valor in self.__dir__():
             if(valor[0:2] != '__'):
                 at = getattr(self, valor)
-                final += str(at).ljust(at.size, ' ')
+                final += str(at).rjust(at.size, ' ')
                 i += 1
         return final
 
@@ -70,6 +70,9 @@ class FormatoN(Formato):
         Formato do tipo N, numérico genérico
     """
 
+    def __str__(self):
+        return str(self.value).rjust(self.size, '0')
+
     def validar(self):
         super().pre_validate()
         return True
@@ -97,7 +100,7 @@ class FormatoNValor(Formato):
 
     def __str__(self):
         return str("{0:." + str(self.decimal_places) +
-                   "}").format(self.value).rstrip('.').ljust(self.size, '0')
+                   "}").format(self.value).rstrip('.').rjust(self.size, '0')
 
     def validar(self):
         super().pre_validate()
