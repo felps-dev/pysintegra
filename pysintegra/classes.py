@@ -39,6 +39,8 @@ class Registro():
                         raise ValueError(
                             "Erro no " + self.__class__.__name__ + ": " + str(e) + '. Valor: ' + str(args[i]))
                     i += 1
+                else:
+                    setattr(self, variavel, new_registro)
 
 
 class Formato():
