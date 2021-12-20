@@ -2,7 +2,7 @@
 
 ## Com o surgimento do SPED, muitos estados não utilizam mais este formato, confira se a UF de destino realmente exige o SINTEGRA.
 
-A lib teve frotes inspirações de arquitetura baseadas nessas:
+A lib teve fortes inspirações de arquitetura baseadas nessas:
 
 - https://github.com/TadaSoftware/PyNFe
 - https://github.com/sped-br/python-sped
