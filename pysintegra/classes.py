@@ -95,7 +95,7 @@ class FormatoNValor(Formato):
     """
 
     def __str__(self):
-        return str("{0:." + self.decimal_places +
+        return str("{0:." + str(self.decimal_places) +
                    "}").format(self.value).rstrip('.').ljust(self.size, '0')
 
     def validar(self):
