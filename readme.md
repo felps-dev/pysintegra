@@ -14,7 +14,7 @@ Nenhuma dependência até o momento.
 - [x] Criar estrutura inicial para gerar os registros
 - [x] Fazer serialização dos registros
 - [ ] Fazer processo reverso (Importação de um TXT)
-- [ ] Automatizar algumas totalizações dos registros
+- [x] Automatizar totalizações dos registros (Tipo 90)
 
 ### Registros finalizados
 

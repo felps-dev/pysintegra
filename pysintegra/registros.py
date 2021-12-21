@@ -452,8 +452,6 @@ class Registro90(Registro):
         'CNPJ do informante', 14, None)
     ie = FormatoX(
         'Inscrição Estadual do informante', 14, None)
-    tipo_totalizado = FormatoN(
-        'Tipo de registro que será totalizado pelo próximo campo ', 2, None)
-    total = FormatoN(
-        'Total de registros do tipo informado no campo anterior', 8, None)
+    totalizacoes = FormatoX(
+        'Totalizações do registro', 95, None)
     numero = FormatoN('Número de registros tipo 90', 1, None)
