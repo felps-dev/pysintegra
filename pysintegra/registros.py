@@ -84,7 +84,7 @@ class Registro51(Registro):
         'Valor amparado por isenção ou não incidência (com 2 decimais)', 13, None)
     outras = FormatoNValor(
         'Valor que não confira débito ou crédito do ICMS (com 2 decimais) ', 13, None)
-    brancos = FormatoX('Brancos', 20, None, False)
+    brancos = FormatoX('Brancos', 20, '', False)
     situacao = FormatoX('Situação da Nota Fiscal', 1, None)
 
 
@@ -110,7 +110,7 @@ class Registro53(Registro):
     desposa_acessorias = FormatoNValor(
         'Soma das despesas acessórias (frete, Seguro e outras - com 2 decimais) ', 13, None)
     situacao = FormatoX('Situação da Nota Fiscal', 1, None)
-    brancos = FormatoX('Brancos', 30, None, False)
+    brancos = FormatoX('Brancos', 30, '', False)
 
 
 class Registro54(Registro):
@@ -185,7 +185,7 @@ class Registro60M(Registro):
         'Valor venda Bruta', 16, None)
     totalizador = FormatoN(
         'Valor Totalizador geral', 16, None)
-    brancos = FormatoX('Brancos', 37, None, False)
+    brancos = FormatoX('Brancos', 37, '', False)
 
 
 class Registro60A(Registro):
@@ -198,7 +198,7 @@ class Registro60A(Registro):
         'Identificador da Situação Tributária / Alíquota do ICMS', 4, None)
     bc_icms = FormatoNValor(
         'Valor acumulado no final do dia no totalizador parcial da situação tributária / alíquota indicada no campo 05 (com 2 decimais)', 12, None)
-    brancos = FormatoX('Brancos', 79, None, False)
+    brancos = FormatoX('Brancos', 79, '', False)
 
 
 class Registro60I(Registro):
@@ -221,13 +221,13 @@ class Registro60I(Registro):
         'Identificador da Situação Tributária / Alíquota do ICMS', 4, None)
     valor_icms = FormatoNValor(
         'Montante do imposto (com 2 decimais)', 12, None)
-    brancos = FormatoX('Brancos', 16, None, False)
+    brancos = FormatoX('Brancos', 16, '', False)
 
 
 class Registro61(Registro):
     tipo = FormatoN('Tipo 61', 2, '61', False)
-    brancos = FormatoX('Brancos', 14, None, False)
-    brancos = FormatoX('Brancos', 14, None, False)
+    brancos = FormatoX('Brancos', 14, '', False)
+    brancos = FormatoX('Brancos', 14, '', False)
     data = FormatoNData(
         'Data de emissão dos documentos', 8, datetime.now())
     modelo = FormatoX('Código do modelo do documento fiscal', 2, None)
@@ -246,7 +246,7 @@ class Registro61(Registro):
     outras = FormatoNValor(
         'Valor que não confira débito ou crédito do ICMS (com 2 decimais) ', 13, None)
     aliquota = FormatoNValor('Alíquota do ICMS (com 2 decimais)', 4, None)
-    brancos = FormatoX('Brancos', 1, None, False)
+    brancos = FormatoX('Brancos', 1, '', False)
 
 
 class Registro61R(Registro):
@@ -261,7 +261,7 @@ class Registro61R(Registro):
     bc_icms = FormatoNValor(
         'Base de cálculo do ICMS (com 2 decimais)', 16, None)
     aliquota = FormatoNValor('Alíquota do ICMS (com 2 decimais)', 4, None)
-    brancos = FormatoX('Brancos', 54, None, False)
+    brancos = FormatoX('Brancos', 54, '', False)
 
 
 class Registro70(Registro):
@@ -318,7 +318,7 @@ class Registro71(Registro):
     serie = FormatoX('Série do documento fiscal', 3, None)
     numero = FormatoN('Numero da nota fiscal', 6, None)
     valor_total = FormatoNValor('Valor Total', 14, None)
-    brancos = FormatoX('Brancos', 12, None, False)
+    brancos = FormatoX('Brancos', 12, '', False)
 
 
 class Registro74(Registro):
@@ -337,7 +337,7 @@ class Registro74(Registro):
     ie = FormatoX(
         'Inscrição Estadual do proprietário', 14, None)
     uf = FormatoX('UF Do proprietário', 2, None)
-    brancos = FormatoX('Brancos', 10, None, False)
+    brancos = FormatoX('Brancos', 45, '', False)
 
 
 class Registro75(Registro):
@@ -416,7 +416,7 @@ class Registro85(Registro):
         'Data Conhecimento de Embarque', 8, datetime.now())
     modelo = FormatoX('Código do modelo do documento fiscal', 2, None)
     serie = FormatoX('Série do documento fiscal', 3, None)
-    brancos = FormatoX('Brancos', 19, None, False)
+    brancos = FormatoX('Brancos', 19, '', False)
 
 
 class Registro86(Registro):
@@ -443,7 +443,7 @@ class Registro86(Registro):
         'Valor Unitario do Produto com 2 decimais ', 13, None)
     relacionamento = FormatoN(
         'Preencher conforme tabela de códigosde relacionamento entre registro deexportação e nota fiscal de remessacom fim específico', 1, None)
-    brancos = FormatoX('Brancos', 5, None, False)
+    brancos = FormatoX('Brancos', 5, '', False)
 
 
 class Registro90(Registro):
