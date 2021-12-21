@@ -195,12 +195,18 @@ class ArquivoMagnetico(object):
         str_r90 = ''
         lst_r90 = []
 
+        # Se fosse javascript dava pra resolver
+        # isso aqui com um sumby de 1 linha
         for registro, total in totais.items():
             total_geral += total
 
+        # Itera pelos registros para acumular os registros 90
         for registro, total in totais.items():
             if(not registro in ['10', '11']):
                 qt_apurado = total
+                # Esse trecho verifica se passou de 99999999
+                # por que se passou, ele precisa ir gerando
+                # varias repetições até sobrar só o resto.
                 while not qt_apurado <= 0:
                     if(qt_apurado > 99999999):
                         qt_apurado -= 99999999
@@ -210,12 +216,21 @@ class ArquivoMagnetico(object):
                             str(registro) + str(qt_apurado).rjust(8, '0')
                         qt_apurado = 0
                     qt_secoes_registro += 1
+
+                # Se passou de 8 seções, não vai caber em 1
+                # unico registro 90, então resetamos a string e adicionamos
+                # na lista de registros 90
                 if(qt_secoes_registro >= 8):
                     lst_r90.append(str_r90)
                     str_r90 = ''
+
+        # Na ultima linha adicionamos o registro 99 com o total de registros.
         str_r90 = str_r90 + '99' + \
             str(total_geral + len(lst_r90) + 1).rjust(8, '0')
+        # Adiciona na lista dos registros 90
         lst_r90.append(str_r90)
+
+        # Itera os registros 90 finalmente adicionando no SINTEGRA.
         for r90 in lst_r90:
             sintegra_txt += str(Registro90(
                 self.registros[0].cnpj_mf, self.registros[0].ie, r90, len(lst_r90))) + "\r\n"
