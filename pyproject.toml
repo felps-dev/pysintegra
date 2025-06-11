@@ -190,6 +190,9 @@ quote-annotations = true
     "T201",   # print found
     "ANN",    # flake8-annotations
     "D",      # pydocstyle
+    "BLE001", # blind except
+    "DTZ011", # datetime.date.today() usage
+    "PERF203", # try-except in loop
 ]
 
 # Setup files don't need docstrings

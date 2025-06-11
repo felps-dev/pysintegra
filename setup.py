@@ -11,7 +11,7 @@ setuptools.setup(
     version="1.0.0",
     author="Felipe Correa",
     author_email="eu@felps.dev",
-    description="Modern SINTEGRA magnetic file generator and parser with Pydantic models",
+    description="Modern SINTEGRA magnetic file generator and parser with Pydantic models",  # noqa: E501
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/felps-dev/pysintegra",

@@ -177,12 +177,12 @@ class SintegraProcessor:
         self.add_record(record)
 
     def add_registro_75(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 75 (Código do produto ou serviço e alíquota de ICMS)."""
+        """Add a Registro 75 (Código do produto ou serviço e alíquota de ICMS)."""
         registro = Registro75(**kwargs)
         self.add_record(registro)
 
     def add_registro_51(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 51 (Nota Fiscal/Conta de Energia Elétrica, Gás, Água, Comunicações e Similares)."""
+        """Add a Registro 51 (Nota Fiscal/Conta de Energia Elétrica, Gás, Água, Comunicações e Similares)."""  # noqa: E501
         registro = Registro51(**kwargs)
         self.add_record(registro)
 
@@ -207,37 +207,37 @@ class SintegraProcessor:
         self.add_record(registro)
 
     def add_registro_60a(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 60A (ECF - Alíquota)."""
+        """Add a Registro 60A (ECF - Alíquota)."""
         registro = Registro60A(**kwargs)
         self.add_record(registro)
 
     def add_registro_60i(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 60I (ECF - Item)."""
+        """Add a Registro 60I (ECF - Item)."""
         registro = Registro60I(**kwargs)
         self.add_record(registro)
 
     def add_registro_61(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 61 (Resumo Mensal de Documento Fiscal Emitido por ECF)."""
+        """Add a Registro 61 (Resumo Mensal de Documento Fiscal Emitido por ECF)."""
         registro = Registro61(**kwargs)
         self.add_record(registro)
 
     def add_registro_61r(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 61R (Resumo Mensal de Itens do ECF por Produto)."""
+        """Add a Registro 61R (Resumo Mensal de Itens do ECF por Produto)."""
         registro = Registro61R(**kwargs)
         self.add_record(registro)
 
     def add_registro_70(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 70 (Nota Fiscal de Serviços de Comunicação e de Telecomunicação)."""
+        """Add a Registro 70 (Nota Fiscal de Serviços de Comunicação e de Telecomunicação)."""  # noqa: E501
         registro = Registro70(**kwargs)
         self.add_record(registro)
 
     def add_registro_71(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 71 (Nota Fiscal de Serviços de Transporte)."""
+        """Add a Registro 71 (Nota Fiscal de Serviços de Transporte)."""
         registro = Registro71(**kwargs)
         self.add_record(registro)
 
     def add_registro_76(self, **kwargs: Any) -> None:
-        """Adiciona um registro tipo 76 (Nota Fiscal de Serviços de Comunicação)."""
+        """Add a Registro 76 (Nota Fiscal de Serviços de Comunicação)."""
         registro = Registro76(**kwargs)
         self.add_record(registro)
 
@@ -340,7 +340,7 @@ class SintegraProcessor:
 
         # Parse each line
         for line in content.strip().split("\n"):
-            line = line.rstrip("\r")
+            line = line.rstrip("\r")  # noqa: PLW2901
             if len(line) < 2:
                 continue
 

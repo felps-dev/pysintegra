@@ -4,9 +4,11 @@ This module contains all the record types supported by the SINTEGRA format,
 implemented using Pydantic for robust validation and type safety.
 """
 
-from datetime import date
+from __future__ import annotations
+
+from datetime import date  # noqa: TC003
 from decimal import Decimal
-from typing import Literal, Union
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -22,11 +24,12 @@ class BaseRecord(BaseModel):
 
     def to_sintegra_line(self) -> str:
         """Convert the record to a SINTEGRA formatted line."""
-        raise NotImplementedError("Subclasses must implement to_sintegra_line")
+        msg = "Subclasses must implement to_sintegra_line"
+        raise NotImplementedError(msg)
 
     @staticmethod
     def _format_numeric(
-        value: Union[int, float, Decimal], size: int, decimal_places: int = 0
+        value: int | float | Decimal, size: int, decimal_places: int = 0
     ) -> str:
         """Format numeric values for SINTEGRA output."""
         if isinstance(value, (int, float)):
@@ -93,7 +96,8 @@ class Registro10(BaseRecord):
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ must contain only digits")
+            msg = "CNPJ must contain only digits"
+            raise ValueError(msg)
         return v
 
     @field_validator("unidade_federacao")
@@ -129,7 +133,8 @@ class Registro10(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"Invalid UF: {v}")
+            msg = f"Invalid UF: {v}"
+            raise ValueError(msg)
         return v.upper()
 
     def to_sintegra_line(self) -> str:
@@ -168,7 +173,8 @@ class Registro11(BaseRecord):
     @classmethod
     def validate_cep(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CEP must contain only digits")
+            msg = "CEP must contain only digits"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -254,14 +260,16 @@ class Registro50(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError("Invalid UF")
+            msg = "Invalid UF"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ must contain only digits")
+            msg = "CNPJ must contain only digits"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -288,7 +296,7 @@ class Registro50(BaseRecord):
 
 
 class Registro51(BaseRecord):
-    """Registro Tipo 51 - Nota Fiscal/Conta de Energia Elétrica, Gás, Água, Comunicações e Similares
+    """Registro Tipo 51 - Nota Fiscal/Conta de Energia Elétrica, Gás, Água.
 
     Registro obrigatório para informar as notas fiscais/contas de energia elétrica,
     gás, água, comunicações e similares.
@@ -304,7 +312,7 @@ class Registro51(BaseRecord):
     ie: str = Field(
         ...,
         max_length=14,
-        description="Inscrição Estadual do remetente nas entradas e do destinatário nas saídas",
+        description="Inscrição Estadual do remetente/destinatário",
     )
     data: date = Field(
         ..., description="Data de emissão na saída ou de recebimento na entrada"
@@ -360,14 +368,16 @@ class Registro51(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -390,7 +400,7 @@ class Registro51(BaseRecord):
 
 
 class Registro53(BaseRecord):
-    """Registro Tipo 53 - Substituição Tributária
+    """Registro Tipo 53 - Substituição Tributária.
 
     Registro obrigatório para informar as operações com substituição tributária.
     """
@@ -405,7 +415,7 @@ class Registro53(BaseRecord):
     ie: str = Field(
         ...,
         max_length=14,
-        description="Inscrição Estadual do remetente nas entradas e do destinatário nas saídas",
+        description="Inscrição Estadual do remetente/destinatário",
     )
     data: date = Field(
         ..., description="Data de emissão na saída ou de recebimento na entrada"
@@ -467,14 +477,16 @@ class Registro53(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -498,7 +510,7 @@ class Registro53(BaseRecord):
 
 
 class Registro54(BaseRecord):
-    """Registro Tipo 54 - Produto
+    """Registro Tipo 54 - Produto.
 
     Registro obrigatório para informar os produtos/mercadorias constantes
     nos documentos fiscais informados nos registros 50, 51, 53, 70, 71 e 76.
@@ -544,7 +556,8 @@ class Registro54(BaseRecord):
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -569,7 +582,7 @@ class Registro54(BaseRecord):
 
 
 class Registro55(BaseRecord):
-    """Registro Tipo 55 - Guia Nacional de Recolhimento de Tributos Estaduais (GNRE)
+    """Registro Tipo 55 - Guia Nacional de Recolhimento de Tributos Estaduais (GNRE).
 
     Registro obrigatório para informar os recolhimentos de ICMS efetuados
     através da GNRE.
@@ -646,14 +659,16 @@ class Registro55(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -675,7 +690,7 @@ class Registro55(BaseRecord):
 
 
 class Registro60M(BaseRecord):
-    """Registro Tipo 60M - Equipamento Emissor de Cupom Fiscal (ECF) - Mestre
+    """Registro Tipo 60M - Equipamento Emissor de Cupom Fiscal (ECF) - Mestre.
 
     Registro obrigatório para informar os dados do equipamento emissor de cupom fiscal.
     """
@@ -720,9 +735,9 @@ class Registro60M(BaseRecord):
 
 
 class Registro60A(BaseRecord):
-    """Registro Tipo 60A - Equipamento Emissor de Cupom Fiscal (ECF) - Alíquota
+    """Registro Tipo 60A - Equipamento Emissor de Cupom Fiscal (ECF) - Alíquota.
 
-    Registro obrigatório para informar as alíquotas do equipamento emissor de cupom fiscal.
+    Registro obrigatório para informar as alíquotas do equipamento emissor de cupom.
     """
 
     tipo: Literal["60"] = Field(default="60", description="Tipo do registro")
@@ -753,7 +768,7 @@ class Registro60A(BaseRecord):
 
 
 class Registro60I(BaseRecord):
-    """Registro Tipo 60I - Equipamento Emissor de Cupom Fiscal (ECF) - Item
+    """Registro Tipo 60I - Equipamento Emissor de Cupom Fiscal (ECF) - Item.
 
     Registro obrigatório para informar os itens do equipamento emissor de cupom fiscal.
     """
@@ -802,7 +817,7 @@ class Registro60I(BaseRecord):
 
 
 class Registro61(BaseRecord):
-    """Registro Tipo 61 - Resumo Mensal de Documento Fiscal Emitido por ECF
+    """Registro Tipo 61 - Resumo Mensal de Documento Fiscal Emitido por ECF.
 
     Registro obrigatório para informar o resumo mensal dos documentos fiscais
     emitidos por equipamento emissor de cupom fiscal.
@@ -850,7 +865,7 @@ class Registro61(BaseRecord):
 
 
 class Registro61R(BaseRecord):
-    """Registro Tipo 61R - Resumo Mensal de Itens do ECF por Produto
+    """Registro Tipo 61R - Resumo Mensal de Itens do ECF por Produto.
 
     Registro obrigatório para informar o resumo mensal de itens do ECF por produto.
     """
@@ -888,7 +903,7 @@ class Registro61R(BaseRecord):
 
 
 class Registro70(BaseRecord):
-    """Registro Tipo 70 - Nota Fiscal de Serviços de Comunicação e de Telecomunicação
+    """Registro Tipo 70 - Nota Fiscal de Serviços de Comunicação e de Telecomunicação.
 
     Registro obrigatório para informar as notas fiscais de serviços de comunicação
     e de telecomunicação.
@@ -969,14 +984,16 @@ class Registro70(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -1002,7 +1019,7 @@ class Registro70(BaseRecord):
 
 
 class Registro71(BaseRecord):
-    """Registro Tipo 71 - Nota Fiscal de Serviços de Transporte
+    """Registro Tipo 71 - Nota Fiscal de Serviços de Transporte.
 
     Registro obrigatório para informar as notas fiscais de serviços de transporte.
     """
@@ -1077,14 +1094,16 @@ class Registro71(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj_tomador", "cnpj_remetente")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -1111,7 +1130,7 @@ class Registro71(BaseRecord):
 
 
 class Registro76(BaseRecord):
-    """Registro Tipo 76 - Nota Fiscal de Serviços de Comunicação
+    """Registro Tipo 76 - Nota Fiscal de Serviços de Comunicação.
 
     Registro obrigatório para informar as notas fiscais de serviços de comunicação.
     """
@@ -1186,14 +1205,16 @@ class Registro76(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -1220,7 +1241,7 @@ class Registro76(BaseRecord):
 
 
 class Registro85(BaseRecord):
-    """Registro Tipo 85 - Informações de Exportação
+    """Registro Tipo 85 - Informações de Exportação.
 
     Registro obrigatório para informar as operações de exportação.
     """
@@ -1272,7 +1293,7 @@ class Registro85(BaseRecord):
 
 
 class Registro86(BaseRecord):
-    """Registro Tipo 86 - Informações Complementares de Exportação
+    """Registro Tipo 86 - Informações Complementares de Exportação.
 
     Registro obrigatório para informar as informações complementares de exportação.
     """
@@ -1304,7 +1325,7 @@ class Registro86(BaseRecord):
     valor: Decimal = Field(..., ge=0, description="Valor unitário do produto")
     relacionamento: int = Field(
         ...,
-        description="Código de relacionamento entre registro de exportação e nota fiscal",
+        description="Código de relacionamento entre registro de exportação e nota fiscal",  # noqa: E501
     )
 
     @field_validator("uf")
@@ -1340,14 +1361,16 @@ class Registro86(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            msg = "CNPJ deve conter apenas dígitos"
+            raise ValueError(msg)
         return v
 
     def to_sintegra_line(self) -> str:
@@ -1448,14 +1471,15 @@ class Registro74(BaseRecord):
             "TO",
         }
         if v.upper() not in valid_ufs:
-            raise ValueError(f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}")
+            msg = f"UF deve ser uma das seguintes: {', '.join(valid_ufs)}"
+            raise ValueError(msg)
         return v.upper()
 
     @field_validator("cnpj")
     @classmethod
     def validate_cnpj(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("CNPJ deve conter apenas dígitos")
+            raise ValueError("CNPJ deve conter apenas dígitos")  # noqa: EM101
         return v
 
     def to_sintegra_line(self) -> str:
@@ -1502,7 +1526,7 @@ class Registro75(BaseRecord):
     @classmethod
     def validate_ncm(cls, v: str) -> str:
         if not v.isdigit():
-            raise ValueError("NCM deve conter apenas dígitos")
+            raise ValueError("NCM deve conter apenas dígitos")  # noqa: EM101
         return v
 
     def to_sintegra_line(self) -> str:
