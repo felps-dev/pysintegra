@@ -5,64 +5,64 @@
 [![PyPI version](https://badge.fury.io/py/pysintegra.svg)](https://badge.fury.io/py/pysintegra)
 [![Python versions](https://img.shields.io/pypi/pyversions/pysintegra.svg)](https://pypi.org/project/pysintegra/)
 
-A modern Python library for generating and parsing SINTEGRA magnetic files with **complete registry type support**, Pydantic models for robust validation, and comprehensive type safety.
+Uma biblioteca Python moderna para gerar e analisar arquivos magnéticos SINTEGRA com **suporte completo a todos os tipos de registro**, modelos Pydantic para validação robusta e segurança de tipos abrangente.
 
-## 🚀 What's New in v1.0.0
+## 🚀 Novidades na v1.0.0
 
-This major release brings **complete SINTEGRA specification coverage** and significant modernization:
+Esta versão principal traz **cobertura completa da especificação SINTEGRA** e modernização significativa:
 
-### ✨ New Features
+### ✨ Novas Funcionalidades
 
-- **🔧 Pydantic Models**: Complete rewrite using Pydantic v2 for robust validation and type safety
-- **📋 Complete Registry Coverage**: All 20+ SINTEGRA registry types implemented
-- **📖 Reverse Loading**: Parse existing SINTEGRA files back into typed models
-- **🎯 Type Safety**: Full type annotations and validation for all fields
-- **📚 Rich Documentation**: Comprehensive docstrings and examples for every registry type
-- **🧪 Comprehensive Testing**: 65+ unit tests with 85% coverage
-- **⚡ GitHub Actions**: Automated testing across Python 3.9-3.13
-- **📦 Modern Packaging**: Updated dependencies and packaging standards
+- **🔧 Modelos Pydantic**: Reescrita completa usando Pydantic v2 para validação robusta e segurança de tipos
+- **📋 Cobertura Completa de Registros**: Todos os 20+ tipos de registro SINTEGRA implementados
+- **📖 Carregamento Reverso**: Analise arquivos SINTEGRA existentes de volta para modelos tipados
+- **🎯 Segurança de Tipos**: Anotações de tipo completas e validação para todos os campos
+- **📚 Documentação Rica**: Docstrings abrangentes e exemplos para cada tipo de registro
+- **🧪 Testes Abrangentes**: 65+ testes unitários com 85% de cobertura
+- **⚡ GitHub Actions**: Testes automatizados no Python 3.9-3.13
+- **📦 Empacotamento Moderno**: Dependências e padrões de empacotamento atualizados
 
-### 🔄 Migration from v0.8
+### 🔄 Migração da v0.8
 
-The new API is backward compatible through aliases, but we recommend migrating to the new Pydantic-based approach:
+A nova API é compatível com versões anteriores através de aliases, mas recomendamos migrar para a nova abordagem baseada em Pydantic:
 
 ```python
-# Old way (still works)
+# Forma antiga (ainda funciona)
 from pysintegra.processamento import ArquivoMagnetico
 
-# New way (recommended)
+# Forma nova (recomendada)
 from pysintegra import SintegraProcessor
 ```
 
-## 📦 Installation
+## 📦 Instalação
 
 ```bash
 pip install pysintegra
 ```
 
-For development:
+Para desenvolvimento:
 
 ```bash
 pip install pysintegra[dev]
 ```
 
-## 🚀 Quick Start
+## 🚀 Início Rápido
 
-### Basic Usage
+### Uso Básico
 
 ```python
 from datetime import date
 from decimal import Decimal
 from pysintegra import SintegraProcessor
 
-# Create a new processor
+# Criar um novo processador
 processor = SintegraProcessor()
 
-# Add establishment record (required)
+# Adicionar registro de estabelecimento (obrigatório)
 processor.add_registro_10(
     cnpj_mf='12345678901234',
     ie='123456789',
-    nome_contribuinte='My Company Ltd',
+    nome_contribuinte='Minha Empresa Ltda',
     municipio='São Paulo',
     unidade_federacao='SP',
     fax='1133334444',
@@ -73,7 +73,7 @@ processor.add_registro_10(
     cod_id_finalidade='1'
 )
 
-# Add address information
+# Adicionar informações de endereço
 processor.add_registro_11(
     logradouro='Av. Paulista',
     numero=1000,
@@ -84,7 +84,7 @@ processor.add_registro_11(
     telefone='11999887766'
 )
 
-# Add invoice record
+# Adicionar registro de nota fiscal
 processor.add_registro_50(
     cnpj='98765432109876',
     ie='987654321',
@@ -104,7 +104,7 @@ processor.add_registro_50(
     situacao='N'
 )
 
-# Add inventory record
+# Adicionar registro de estoque
 processor.add_registro_74(
     data=date(2024, 12, 31),
     codigo='PROD001',
@@ -116,32 +116,32 @@ processor.add_registro_74(
     uf='SP'
 )
 
-# Generate SINTEGRA file
+# Gerar arquivo SINTEGRA
 output = processor.generate_output()
 print(output)
 
-# Save to file
+# Salvar em arquivo
 processor.save_to_file('sintegra.txt')
 ```
 
-### Parsing Existing Files
+### Analisando Arquivos Existentes
 
 ```python
 from pysintegra import SintegraProcessor, Registro10, Registro50
 
-# Parse an existing SINTEGRA file
-processor = SintegraProcessor.parse_from_file('existing_file.txt')
+# Analisar um arquivo SINTEGRA existente
+processor = SintegraProcessor.parse_from_file('arquivo_existente.txt')
 
-# Access parsed records with type safety
+# Acessar registros analisados com segurança de tipos
 for record in processor.records:
     if isinstance(record, Registro10):
-        print(f"Company: {record.nome_contribuinte}")
+        print(f"Empresa: {record.nome_contribuinte}")
         print(f"CNPJ: {record.cnpj_mf}")
     elif isinstance(record, Registro50):
-        print(f"Invoice: {record.numero}, Value: {record.valor_total}")
+        print(f"Nota Fiscal: {record.numero}, Valor: {record.valor_total}")
 ```
 
-### Direct Model Usage
+### Uso Direto de Modelos
 
 ```python
 from datetime import date
@@ -149,11 +149,11 @@ from decimal import Decimal
 from pydantic import ValidationError
 from pysintegra import Registro10, Registro74
 
-# Create records directly with validation
+# Criar registros diretamente com validação
 registro_10 = Registro10(
     cnpj_mf='12345678901234',
     ie='123456789',
-    nome_contribuinte='Test Company',
+    nome_contribuinte='Empresa Teste',
     municipio='São Paulo',
     unidade_federacao='SP',
     fax='1133334444',
@@ -164,101 +164,101 @@ registro_10 = Registro10(
     cod_id_finalidade='1'
 )
 
-# Automatic validation
+# Validação automática
 try:
-    invalid_record = Registro10(
-        cnpj_mf='invalid',  # Will raise ValidationError
-        # ... other fields
+    registro_invalido = Registro10(
+        cnpj_mf='inválido',  # Irá gerar ValidationError
+        # ... outros campos
     )
 except ValidationError as e:
-    print(f"Validation error: {e}")
+    print(f"Erro de validação: {e}")
 
-# Generate SINTEGRA line
-line = registro_10.to_sintegra_line()
+# Gerar linha SINTEGRA
+linha = registro_10.to_sintegra_line()
 ```
 
-## 📋 Complete Registry Type Support
+## 📋 Suporte Completo a Tipos de Registro
 
-PySintegra now supports **all SINTEGRA registry types**:
+PySintegra agora suporta **todos os tipos de registro SINTEGRA**:
 
-### 🏢 Establishment Information
+### 🏢 Informações do Estabelecimento
 
-- **Registro 10**: Master establishment record (required)
-- **Registro 11**: Complementary establishment data (address, contact)
+- **Registro 10**: Registro mestre do estabelecimento (obrigatório)
+- **Registro 11**: Dados complementares do estabelecimento (endereço, contato)
 
-### 📄 Invoice and Document Records
+### 📄 Registros de Notas Fiscais e Documentos
 
-- **Registro 50**: Invoice totals (models 1 and 1A) with ICMS information
-- **Registro 51**: Energy/utilities invoices (electricity, gas, water, communications)
-- **Registro 53**: Tax substitution records
-- **Registro 54**: Product/item details for invoices
+- **Registro 50**: Totais de notas fiscais (modelos 1 e 1A) com informações de ICMS
+- **Registro 51**: Notas fiscais de energia/utilidades (eletricidade, gás, água, comunicações)
+- **Registro 53**: Registros de substituição tributária
+- **Registro 54**: Detalhes de produtos/itens para notas fiscais
 
-### 💰 Tax and Payment Records
+### 💰 Registros de Impostos e Pagamentos
 
-- **Registro 55**: GNRE (National Guide for State Tax Collection)
+- **Registro 55**: GNRE (Guia Nacional de Recolhimento de Tributos Estaduais)
 
-### 🖨️ Electronic Fiscal Equipment (ECF)
+### 🖨️ Equipamento Fiscal Eletrônico (ECF)
 
-- **Registro 60M**: ECF master record (daily summary)
-- **Registro 60A**: ECF tax rate records
-- **Registro 60I**: ECF item records
+- **Registro 60M**: Registro mestre ECF (resumo diário)
+- **Registro 60A**: Registros de alíquotas ECF
+- **Registro 60I**: Registros de itens ECF
 
-### 📊 Summary Records
+### 📊 Registros de Resumo
 
-- **Registro 61**: Monthly summary of fiscal documents issued by ECF
-- **Registro 61R**: Monthly summary of ECF items by product
+- **Registro 61**: Resumo mensal de documentos fiscais emitidos por ECF
+- **Registro 61R**: Resumo mensal de itens ECF por produto
 
-### 🚚 Transportation Services
+### 🚚 Serviços de Transporte
 
-- **Registro 70**: Communication and telecommunication service invoices
-- **Registro 71**: Transportation service invoices
-- **Registro 76**: Communication service invoices (model 21/22)
+- **Registro 70**: Notas fiscais de serviços de comunicação e telecomunicação
+- **Registro 71**: Notas fiscais de serviços de transporte
+- **Registro 76**: Notas fiscais de serviços de comunicação (modelo 21/22)
 
-### 📦 Inventory and Products
+### 📦 Estoque e Produtos
 
-- **Registro 74**: Inventory records
-- **Registro 75**: Product and service codes with tax information
+- **Registro 74**: Registros de estoque
+- **Registro 75**: Códigos de produtos e serviços com informações tributárias
 
-### 🌍 Export Operations
+### 🌍 Operações de Exportação
 
-- **Registro 85**: Export information
-- **Registro 86**: Complementary export information
+- **Registro 85**: Informações de exportação
+- **Registro 86**: Informações complementares de exportação
 
-### 📈 Totalization
+### 📈 Totalização
 
-- **Registro 90**: Totalization records (auto-generated)
+- **Registro 90**: Registros de totalização (gerados automaticamente)
 
-## 🔧 Advanced Features
+## 🔧 Funcionalidades Avançadas
 
-### Comprehensive Validation
+### Validação Abrangente
 
-PySintegra provides extensive validation for all registry types:
+PySintegra fornece validação extensiva para todos os tipos de registro:
 
-- **CNPJ Format**: Ensures CNPJ contains only digits and has correct length
-- **UF Validation**: Validates all Brazilian state codes (AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO)
-- **CFOP Ranges**: Ensures CFOP codes are within valid ranges (1000-9999)
-- **Date Validation**: Proper date format and range checking
-- **Decimal Precision**: Automatic handling of decimal places for monetary values
-- **Field Length**: Ensures all fields meet SINTEGRA specifications
-- **NCM Validation**: Validates NCM codes for product classification
-- **Tax Rate Validation**: Ensures tax rates are within valid ranges
+- **Formato CNPJ**: Garante que o CNPJ contenha apenas dígitos e tenha o comprimento correto
+- **Validação UF**: Valida todos os códigos de estado brasileiros (AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO)
+- **Faixas CFOP**: Garante que os códigos CFOP estejam dentro das faixas válidas (1000-9999)
+- **Validação de Data**: Formato de data adequado e verificação de faixa
+- **Precisão Decimal**: Manipulação automática de casas decimais para valores monetários
+- **Comprimento de Campo**: Garante que todos os campos atendam às especificações SINTEGRA
+- **Validação NCM**: Valida códigos NCM para classificação de produtos
+- **Validação de Alíquota**: Garante que as alíquotas estejam dentro das faixas válidas
 
-### Type Safety
+### Segurança de Tipos
 
-All models are fully typed with Pydantic v2:
+Todos os modelos são totalmente tipados com Pydantic v2:
 
 ```python
 from pysintegra import Registro75
 from decimal import Decimal
 from datetime import date
 
-# Full type safety and autocompletion
-product = Registro75(
+# Segurança de tipos completa e autocompletar
+produto = Registro75(
     data_inicial=date(2024, 1, 1),
     data_final=date(2024, 12, 31),
     codigo="PROD001",
     ncm="12345678",
-    descricao="Premium Product",
+    descricao="Produto Premium",
     un_com="UN",
     valor_ipi=Decimal("5.00"),
     valor_icms=Decimal("18.00"),
@@ -267,9 +267,9 @@ product = Registro75(
 )
 ```
 
-### Batch Processing
+### Processamento em Lote
 
-Process multiple records efficiently:
+Processe múltiplos registros de forma eficiente:
 
 ```python
 from pysintegra import SintegraProcessor
@@ -278,17 +278,17 @@ from decimal import Decimal
 
 processor = SintegraProcessor()
 
-# Add establishment info
+# Adicionar informações do estabelecimento
 processor.add_registro_10(...)
 
-# Batch add products
-products = [
-    ("PROD001", "Product 1", "12345678"),
-    ("PROD002", "Product 2", "87654321"),
-    ("PROD003", "Product 3", "11223344"),
+# Adicionar produtos em lote
+produtos = [
+    ("PROD001", "Produto 1", "12345678"),
+    ("PROD002", "Produto 2", "87654321"),
+    ("PROD003", "Produto 3", "11223344"),
 ]
 
-for codigo, descricao, ncm in products:
+for codigo, descricao, ncm in produtos:
     processor.add_registro_75(
         data_inicial=date(2024, 1, 1),
         data_final=date(2024, 12, 31),
@@ -302,103 +302,103 @@ for codigo, descricao, ncm in products:
         valor_bc_st=Decimal("0.00")
     )
 
-# Generate file with all records
-processor.save_to_file('complete_sintegra.txt')
+# Gerar arquivo com todos os registros
+processor.save_to_file('sintegra_completo.txt')
 ```
 
-## 📚 Examples
+## 📚 Exemplos
 
-Check out the `examples/` directory for comprehensive usage examples:
+Confira o diretório `examples/` para exemplos de uso abrangentes:
 
-- **`basic_usage.py`**: Simple file generation with essential records
-- **`parse_file.py`**: File parsing and validation demonstration
-- **`advanced_usage.py`**: Complex scenarios with multiple record types, validation demos, and batch processing
+- **`basic_usage.py`**: Geração simples de arquivo com registros essenciais
+- **`parse_file.py`**: Demonstração de análise e validação de arquivo
+- **`advanced_usage.py`**: Cenários complexos com múltiplos tipos de registro, demonstrações de validação e processamento em lote
 
-## 🧪 Testing
+## 🧪 Testes
 
-Run the comprehensive test suite:
+Execute a suíte de testes abrangente:
 
 ```bash
-# Install development dependencies
+# Instalar dependências de desenvolvimento
 pip install -e .[dev]
 
-# Run all 65+ tests
+# Executar todos os 65+ testes
 pytest
 
-# Run tests with coverage (85%+ coverage)
+# Executar testes com cobertura (85%+ de cobertura)
 pytest --cov=pysintegra --cov-report=html
 
-# Run specific test categories
-pytest tests/test_models.py  # Test all registry models
-pytest tests/test_processor.py  # Test processor functionality
+# Executar categorias específicas de teste
+pytest tests/test_models.py  # Testar todos os modelos de registro
+pytest tests/test_processor.py  # Testar funcionalidade do processador
 ```
 
-## 🤝 Contributing
+## 🤝 Contribuindo
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request. Para mudanças importantes, abra primeiro uma issue para discutir o que você gostaria de alterar.
 
-### Development Setup
+### Configuração de Desenvolvimento
 
 ```bash
-# Clone the repository
+# Clonar o repositório
 git clone https://github.com/felps-dev/pysintegra.git
 cd pysintegra
 
-# Create virtual environment
+# Criar ambiente virtual
 python -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate
+source env/bin/activate  # No Windows: env\Scripts\activate
 
-# Install in development mode
+# Instalar em modo de desenvolvimento
 pip install -e .[dev]
 
-# Run tests
+# Executar testes
 pytest
 ```
 
-### Adding New Registry Types
+### Adicionando Novos Tipos de Registro
 
-The architecture makes it easy to add new registry types:
+A arquitetura facilita a adição de novos tipos de registro:
 
-1. Create a new Pydantic model in `models.py`
-2. Add validation methods as needed
-3. Implement `to_sintegra_line()` method
-4. Add helper method to `SintegraProcessor`
-5. Add comprehensive tests
+1. Criar um novo modelo Pydantic em `models.py`
+2. Adicionar métodos de validação conforme necessário
+3. Implementar método `to_sintegra_line()`
+4. Adicionar método auxiliar ao `SintegraProcessor`
+5. Adicionar testes abrangentes
 
-## 📄 License
+## 📄 Licença
 
-This project is licensed under the GNU Lesser General Public License v3 (LGPLv3) - see the [LICENSE](LICENSE) file for details.
+Este projeto está licenciado sob a GNU Lesser General Public License v3 (LGPLv3) - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ## 🔗 Links
 
-- [PyPI Package](https://pypi.org/project/pysintegra/)
-- [GitHub Repository](https://github.com/felps-dev/pysintegra)
-- [Issue Tracker](https://github.com/felps-dev/pysintegra/issues)
-- [SINTEGRA Official Documentation](http://www.sintegra.gov.br/)
+- [Pacote PyPI](https://pypi.org/project/pysintegra/)
+- [Repositório GitHub](https://github.com/felps-dev/pysintegra)
+- [Rastreador de Issues](https://github.com/felps-dev/pysintegra/issues)
+- [Documentação Oficial SINTEGRA](http://www.sintegra.gov.br/)
 
 ## 📈 Changelog
 
-### v1.0.0 (June 11, 2025)
+### v1.0.0 (11 de Junho de 2025)
 
-- **BREAKING**: Complete rewrite with Pydantic models
-- **NEW**: Complete SINTEGRA registry type coverage (20+ types)
-- **NEW**: Reverse loading from SINTEGRA files
-- **NEW**: Comprehensive type safety and validation
-- **NEW**: 65+ unit tests with 85% coverage
-- **NEW**: GitHub Actions CI/CD pipeline
-- **NEW**: Modern Python packaging (supports 3.9-3.13)
-- **NEW**: All registry types: 10, 11, 50, 51, 53, 54, 55, 60M, 60A, 60I, 61, 61R, 70, 71, 74, 75, 76, 85, 86, 90
-- **IMPROVED**: Better error messages and validation
-- **IMPROVED**: Comprehensive documentation and examples
-- **IMPROVED**: Performance and memory efficiency
+- **BREAKING**: Reescrita completa com modelos Pydantic
+- **NOVO**: Cobertura completa de tipos de registro SINTEGRA (20+ tipos)
+- **NOVO**: Carregamento reverso de arquivos SINTEGRA
+- **NOVO**: Segurança de tipos e validação abrangentes
+- **NOVO**: 65+ testes unitários com 85% de cobertura
+- **NOVO**: Pipeline CI/CD GitHub Actions
+- **NOVO**: Empacotamento Python moderno (suporta 3.9-3.13)
+- **NOVO**: Todos os tipos de registro: 10, 11, 50, 51, 53, 54, 55, 60M, 60A, 60I, 61, 61R, 70, 71, 74, 75, 76, 85, 86, 90
+- **MELHORADO**: Melhores mensagens de erro e validação
+- **MELHORADO**: Documentação e exemplos abrangentes
+- **MELHORADO**: Performance e eficiência de memória
 
-### v0.8 (Previous)
+### v0.8 (Anterior)
 
-- Basic SINTEGRA file generation
-- Manual class-based approach
-- Limited registry type support
-- Limited validation
+- Geração básica de arquivo SINTEGRA
+- Abordagem manual baseada em classes
+- Suporte limitado a tipos de registro
+- Validação limitada
 
 ---
 
-Made with ❤️ by [Felipe Correa](https://github.com/felps-dev)
+Feito com ❤️ por [Felipe Correa](https://github.com/felps-dev)
