@@ -5,8 +5,8 @@ Unit tests for PySintegra Pydantic models.
 from datetime import date
 from decimal import Decimal
 
-import pytest
 from pydantic import ValidationError
+import pytest
 
 from pysintegra.models import (
     BaseRecord,

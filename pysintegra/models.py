@@ -1,5 +1,4 @@
-"""
-Pydantic models for SINTEGRA magnetic file generation.
+"""Pydantic models for SINTEGRA magnetic file generation.
 
 This module contains all the record types supported by the SINTEGRA format,
 implemented using Pydantic for robust validation and type safety.
@@ -52,8 +51,7 @@ class BaseRecord(BaseModel):
 
 
 class Registro10(BaseRecord):
-    """
-    Master establishment record for identifying the reporting establishment.
+    """Master establishment record for identifying the reporting establishment.
 
     This record contains the basic identification information of the establishment
     that is providing the SINTEGRA data.
@@ -153,8 +151,7 @@ class Registro10(BaseRecord):
 
 
 class Registro11(BaseRecord):
-    """
-    Complementary data of the reporting party.
+    """Complementary data of the reporting party.
 
     Contains additional address and contact information for the establishment.
     """
@@ -189,8 +186,7 @@ class Registro11(BaseRecord):
 
 
 class Registro50(BaseRecord):
-    """
-    Invoice total record for models 1 and 1A.
+    """Invoice total record for models 1 and 1A.
 
     Specifies totalization information for fiscal documents regarding ICMS.
     For documents with multiple ICMS rates and/or CFOPs, generate one record
@@ -292,8 +288,7 @@ class Registro50(BaseRecord):
 
 
 class Registro51(BaseRecord):
-    """
-    Registro Tipo 51 - Nota Fiscal/Conta de Energia Elétrica, Gás, Água, Comunicações e Similares
+    """Registro Tipo 51 - Nota Fiscal/Conta de Energia Elétrica, Gás, Água, Comunicações e Similares
 
     Registro obrigatório para informar as notas fiscais/contas de energia elétrica,
     gás, água, comunicações e similares.
@@ -395,8 +390,7 @@ class Registro51(BaseRecord):
 
 
 class Registro53(BaseRecord):
-    """
-    Registro Tipo 53 - Substituição Tributária
+    """Registro Tipo 53 - Substituição Tributária
 
     Registro obrigatório para informar as operações com substituição tributária.
     """
@@ -504,8 +498,7 @@ class Registro53(BaseRecord):
 
 
 class Registro54(BaseRecord):
-    """
-    Registro Tipo 54 - Produto
+    """Registro Tipo 54 - Produto
 
     Registro obrigatório para informar os produtos/mercadorias constantes
     nos documentos fiscais informados nos registros 50, 51, 53, 70, 71 e 76.
@@ -576,8 +569,7 @@ class Registro54(BaseRecord):
 
 
 class Registro55(BaseRecord):
-    """
-    Registro Tipo 55 - Guia Nacional de Recolhimento de Tributos Estaduais (GNRE)
+    """Registro Tipo 55 - Guia Nacional de Recolhimento de Tributos Estaduais (GNRE)
 
     Registro obrigatório para informar os recolhimentos de ICMS efetuados
     através da GNRE.
@@ -683,8 +675,7 @@ class Registro55(BaseRecord):
 
 
 class Registro60M(BaseRecord):
-    """
-    Registro Tipo 60M - Equipamento Emissor de Cupom Fiscal (ECF) - Mestre
+    """Registro Tipo 60M - Equipamento Emissor de Cupom Fiscal (ECF) - Mestre
 
     Registro obrigatório para informar os dados do equipamento emissor de cupom fiscal.
     """
@@ -729,8 +720,7 @@ class Registro60M(BaseRecord):
 
 
 class Registro60A(BaseRecord):
-    """
-    Registro Tipo 60A - Equipamento Emissor de Cupom Fiscal (ECF) - Alíquota
+    """Registro Tipo 60A - Equipamento Emissor de Cupom Fiscal (ECF) - Alíquota
 
     Registro obrigatório para informar as alíquotas do equipamento emissor de cupom fiscal.
     """
@@ -763,8 +753,7 @@ class Registro60A(BaseRecord):
 
 
 class Registro60I(BaseRecord):
-    """
-    Registro Tipo 60I - Equipamento Emissor de Cupom Fiscal (ECF) - Item
+    """Registro Tipo 60I - Equipamento Emissor de Cupom Fiscal (ECF) - Item
 
     Registro obrigatório para informar os itens do equipamento emissor de cupom fiscal.
     """
@@ -813,8 +802,7 @@ class Registro60I(BaseRecord):
 
 
 class Registro61(BaseRecord):
-    """
-    Registro Tipo 61 - Resumo Mensal de Documento Fiscal Emitido por ECF
+    """Registro Tipo 61 - Resumo Mensal de Documento Fiscal Emitido por ECF
 
     Registro obrigatório para informar o resumo mensal dos documentos fiscais
     emitidos por equipamento emissor de cupom fiscal.
@@ -862,8 +850,7 @@ class Registro61(BaseRecord):
 
 
 class Registro61R(BaseRecord):
-    """
-    Registro Tipo 61R - Resumo Mensal de Itens do ECF por Produto
+    """Registro Tipo 61R - Resumo Mensal de Itens do ECF por Produto
 
     Registro obrigatório para informar o resumo mensal de itens do ECF por produto.
     """
@@ -901,8 +888,7 @@ class Registro61R(BaseRecord):
 
 
 class Registro70(BaseRecord):
-    """
-    Registro Tipo 70 - Nota Fiscal de Serviços de Comunicação e de Telecomunicação
+    """Registro Tipo 70 - Nota Fiscal de Serviços de Comunicação e de Telecomunicação
 
     Registro obrigatório para informar as notas fiscais de serviços de comunicação
     e de telecomunicação.
@@ -1016,8 +1002,7 @@ class Registro70(BaseRecord):
 
 
 class Registro71(BaseRecord):
-    """
-    Registro Tipo 71 - Nota Fiscal de Serviços de Transporte
+    """Registro Tipo 71 - Nota Fiscal de Serviços de Transporte
 
     Registro obrigatório para informar as notas fiscais de serviços de transporte.
     """
@@ -1126,8 +1111,7 @@ class Registro71(BaseRecord):
 
 
 class Registro76(BaseRecord):
-    """
-    Registro Tipo 76 - Nota Fiscal de Serviços de Comunicação
+    """Registro Tipo 76 - Nota Fiscal de Serviços de Comunicação
 
     Registro obrigatório para informar as notas fiscais de serviços de comunicação.
     """
@@ -1236,8 +1220,7 @@ class Registro76(BaseRecord):
 
 
 class Registro85(BaseRecord):
-    """
-    Registro Tipo 85 - Informações de Exportação
+    """Registro Tipo 85 - Informações de Exportação
 
     Registro obrigatório para informar as operações de exportação.
     """
@@ -1289,8 +1272,7 @@ class Registro85(BaseRecord):
 
 
 class Registro86(BaseRecord):
-    """
-    Registro Tipo 86 - Informações Complementares de Exportação
+    """Registro Tipo 86 - Informações Complementares de Exportação
 
     Registro obrigatório para informar as informações complementares de exportação.
     """
@@ -1389,8 +1371,7 @@ class Registro86(BaseRecord):
 
 
 class Registro90(BaseRecord):
-    """
-    Totalization record.
+    """Totalization record.
 
     Contains summary information about the number of records of each type
     in the SINTEGRA file.
@@ -1417,8 +1398,7 @@ class Registro90(BaseRecord):
 
 
 class Registro74(BaseRecord):
-    """
-    Inventory record.
+    """Inventory record.
 
     Contains information about inventory items including quantities,
     unit values, and ownership details.
@@ -1495,8 +1475,7 @@ class Registro74(BaseRecord):
 
 
 class Registro75(BaseRecord):
-    """
-    Product and service code record.
+    """Product and service code record.
 
     Contains detailed information about products including NCM codes,
     descriptions, units of measure, and tax rates.

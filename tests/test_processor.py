@@ -1,9 +1,9 @@
 """Tests for pysintegra processor."""
 
-import tempfile
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
+import tempfile
 
 import pytest
 

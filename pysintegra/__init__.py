@@ -1,5 +1,4 @@
-"""
-PySintegra - SINTEGRA magnetic file generator and parser.
+"""PySintegra - SINTEGRA magnetic file generator and parser.
 
 A modern Python library for generating and parsing SINTEGRA magnetic files
 with Pydantic models for robust validation and type safety.
@@ -42,6 +41,7 @@ __license__ = "GNU Lesser General Public License (LGPL)"
 __url__ = "https://github.com/felps-dev/pysintegra"
 
 __all__ = [
+    "ArquivoMagnetico",
     "BaseRecord",
     "Registro10",
     "Registro11",
@@ -64,6 +64,5 @@ __all__ = [
     "Registro86",
     "Registro90",
     "SintegraProcessor",
-    "ArquivoMagnetico",
     "get_version",
 ]
