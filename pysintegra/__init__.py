@@ -28,9 +28,6 @@ from .models import (
     Registro86,
     Registro90,
 )
-
-# Legacy imports for backward compatibility
-from .processamento import ArquivoMagnetico as LegacyArquivoMagnetico
 from .processor import ArquivoMagnetico, SintegraProcessor
 
 
@@ -49,11 +46,24 @@ __all__ = [
     "Registro10",
     "Registro11",
     "Registro50",
+    "Registro51",
+    "Registro53",
+    "Registro54",
+    "Registro55",
+    "Registro60A",
+    "Registro60I",
+    "Registro60M",
+    "Registro61",
+    "Registro61R",
+    "Registro70",
+    "Registro71",
     "Registro74",
     "Registro75",
+    "Registro76",
+    "Registro85",
+    "Registro86",
     "Registro90",
     "SintegraProcessor",
     "ArquivoMagnetico",
-    "LegacyArquivoMagnetico",
     "get_version",
 ]

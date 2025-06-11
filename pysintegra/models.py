@@ -225,6 +225,49 @@ class Registro50(BaseRecord):
     aliquota: Decimal = Field(..., description="ICMS rate", ge=0, le=100)
     situacao: str = Field(..., description="Invoice status", min_length=1, max_length=1)
 
+    @field_validator("unidade_federacao")
+    @classmethod
+    def validate_uf(cls, v: str) -> str:
+        valid_ufs = {
+            "AC",
+            "AL",
+            "AP",
+            "AM",
+            "BA",
+            "CE",
+            "DF",
+            "ES",
+            "GO",
+            "MA",
+            "MT",
+            "MS",
+            "MG",
+            "PA",
+            "PB",
+            "PR",
+            "PE",
+            "PI",
+            "RJ",
+            "RN",
+            "RS",
+            "RO",
+            "RR",
+            "SC",
+            "SP",
+            "SE",
+            "TO",
+        }
+        if v.upper() not in valid_ufs:
+            raise ValueError("Invalid UF")
+        return v.upper()
+
+    @field_validator("cnpj")
+    @classmethod
+    def validate_cnpj(cls, v: str) -> str:
+        if not v.isdigit():
+            raise ValueError("CNPJ must contain only digits")
+        return v
+
     def to_sintegra_line(self) -> str:
         """Convert to SINTEGRA format line."""
         return (
