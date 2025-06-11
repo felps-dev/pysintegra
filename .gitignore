@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
@@ -141,5 +140,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# SINTEGRA output files
+*.txt
+!requirements*.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/python
